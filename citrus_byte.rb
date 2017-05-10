@@ -5,7 +5,7 @@ module ArrayTool
     list.each_with_object(acc) do |item,acc|
       if item.class == Array 
         flatten(item,acc)
-      elsif item.class == Fixnum
+      elsif item.kind_of?(Integer)
         acc << item
       else
         raise ArgumentError, "non-integer value found: #{item.class}"
