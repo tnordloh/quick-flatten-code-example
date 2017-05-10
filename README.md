@@ -29,7 +29,7 @@ Since this example is Elixir-inspired, I want to mention that the recursion here
 creates a higher load on the stack than you would see in an Elixir implementation
 using tail-call recursion.  I'm trading code clarity for a performance hit.  If 
 this method were to see a very deeply nested array, it would buckle under the 
-weight far sooner than a similarly constructed Elixir implementation. In the
+weight far sooner than a similarly constructed Elixir implementation. In
 citrus_byte_test.rb, this vulnerability is demonstrated.  So, for the sake of
 completeness, check out the very rough non-recursive solution,  below, which
 passes all of the current tests (except the one expecting the stack error).
