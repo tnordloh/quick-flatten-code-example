@@ -30,11 +30,12 @@ carries a higher memory-usage penalty than you would see in an Elixir
 implementation using tail-call recursion.  I'm trading code clarity for a 
 performance hit.  If this method were to see a very very large array, it would 
 buckle under the weight far sooner than a similarly constructed Elixir 
-implementation. The skipped test actually showed me this failure, when I tried
-for a 10,000-deep nested array.  So, for the sake of completeness, here's a 
-very rough non-recursive solution.  Obviously, this is a trade-off.  It's a lot
-tougher to read, and generally a little uglier.  But it can handle much deeper
-nesting:
+implementation. In the tests, the final, test, which is set to be skipped, 
+can demonstrate this failure for an array that is for an array that is nested
+10000 times.  So, for the sake of completeness, there's a very rough non-recursive
+solution, which passes all of the current tests.  Obviously, this is a trade-off.
+It's a lot tougher to read, and generally a little uglier.  But it can handle much
+deeper nesting.
 
 ```ruby
 def flatten(list)
