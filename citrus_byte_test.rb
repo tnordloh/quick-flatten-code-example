@@ -1,7 +1,9 @@
 require 'minitest/autorun'
 
 require_relative 'citrus_byte.rb'
+
 describe ArrayTool do
+
   it "can flatten an array of integers" do
     input = [[1,2,[3]],4]
     result = [1,2,3,4]
@@ -14,7 +16,7 @@ describe ArrayTool do
 
   it "raises an error on anything other than an integer" do
     input = ["some string"]
-    proc {ArrayTool.flatten(input)}.must_raise(ArgumentError)
+    proc { ArrayTool.flatten(input) }.must_raise(ArgumentError)
   end
 
 end
