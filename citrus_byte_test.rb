@@ -25,4 +25,9 @@ describe ArrayTool do
     proc { ArrayTool.flatten(input) }.must_raise(ArgumentError)
   end
 
+  it "can demonstrate Ruby's recursion weaknesses" do
+    input = (1..10_000).reduce([1]) { |acc,_| [acc] }
+    ArrayTool.flatten(input).must_equal([1])
+  end
+
 end
