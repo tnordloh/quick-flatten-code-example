@@ -26,17 +26,15 @@ list.each_with_object(acc) do |item,acc|
 end
 ```
 Since this example is Elixir-inspired, I want to mention that the recursion here
-carries a higher memory-usage penalty than you would see in an Elixir
-implementation using tail-call recursion.  I'm trading code clarity for a 
-performance hit.  If this method were to see a very very large array, it would 
-buckle under the weight far sooner than a similarly constructed Elixir 
-implementation. In the tests, the final, test, which is set to be skipped, 
-can demonstrate this failure for an array that is for an array that is nested
-10000 times.  So, for the sake of completeness, there's a very rough non-recursive
-solution, which passes all of the current tests.  Obviously, this is a trade-off.
-It's a lot tougher to read, and generally a little uglier.  But it can handle much
-deeper nesting.
-
+creates a higher load on the stack than you would see in an Elixir implementation
+using tail-call recursion.  I'm trading code clarity for a performance hit.  If 
+this method were to see a very deeply nested array, it would buckle under the 
+weight far sooner than a similarly constructed Elixir implementation. In the
+citrus_byte_test.rb, this vulnerability is demonstrated.  So, for the sake of
+completeness, check out the very rough non-recursive solution,  below, which
+passes all of the current tests (except the one expecting the stack error).
+Obviously, this code represents a trade-off.  It's a lot tougher to read, and
+generally a little uglier.  But it can handle much deeper nesting.
 ```ruby
 def flatten(list)
   until list.all? { |item| item.is_a?(Integer) } || list == []
