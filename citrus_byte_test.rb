@@ -26,9 +26,8 @@ describe ArrayTool do
   end
 
   it "can demonstrate Ruby's recursion weaknesses" do
-    skip
     input = (1..100_000).reduce([1]) { |acc,_| [acc] }
-    ArrayTool.flatten(input).must_equal([1])
+    proc { ArrayTool.flatten(input) }.must_raise(SystemStackError)
   end
 
 end
