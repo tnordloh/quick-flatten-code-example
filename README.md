@@ -1,7 +1,7 @@
-I implemented this in Ruby, because that is the language I'm most familiar with.
+Implemented in Ruby, the language I'm most familiar with.
 
-Also, normally, I wouldn't write so much about a task like this, but I 
-want to do my best to give you a snapshot of how I think about production code.
+Normally, I wouldn't write so much about a task like this, but I want to do my
+best to give you a snapshot of how I think about production code.
 
 I'm learning Elixir right now, so the pattern of this code is inspired by that 
 experience. In place of guard clauses to control the recursion, I'm using 
@@ -18,11 +18,14 @@ data at the moment it is introduced can do a lot to reduce code complexity in
 more generic methods like this, and I think, can help ensure that data transformation
 logic doesn't get intermixed data validation logic.
 
+Since this example is Elixir-inspired, I want to mention that the recursion here
+carries a higher memory-usage penalty than you would see in an Elixir
+implementation, using tail-call recursion.
+
 If there were no need for catching exceptions, the if/elsif/end logic in 
 `ArrayTool.flatten` could be compacted down to a beautiful 1-liner, like this:
 ```ruby
 list.each_with_object(acc) do |item,acc|
-  item.class == Array ? flatten(item,acc) : acc << item
+  item.is_a?(Array) ? flatten(item,acc) : acc << item
 end
 ```
-

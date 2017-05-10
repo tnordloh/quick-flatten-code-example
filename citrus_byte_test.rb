@@ -10,7 +10,7 @@ describe ArrayTool do
     ArrayTool.flatten(input).must_equal(result)
   end
 
-  it "can handle an empty array" do
+  it "makes sure an empty array returns an empty array" do
     ArrayTool.flatten([]).must_equal([])
   end
 

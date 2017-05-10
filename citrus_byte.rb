@@ -1,4 +1,5 @@
 module ArrayTool
+
   module_function
   
   def flatten(list,acc = [])
