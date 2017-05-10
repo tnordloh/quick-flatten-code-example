@@ -32,23 +32,27 @@ performance hit.  If this method were to see a very very large array, it would
 buckle under the weight far sooner than a similarly constructed Elixir 
 implementation. The skipped test actually showed me this failure, when I tried
 for a 10,000-deep nested array.  So, for the sake of completeness, here's a 
-very rough non-recursive solution
+very rough non-recursive solution.  Obviously, this is a trade-off.  It's a lot
+tougher to read, and generally a little uglier.  But it can handle much deeper
+nesting:
+
 ```ruby
 def flatten(list)
-    until list.all? { |item| item.is_a?(Integer) } || list == []
-      list = list.each_with_object([]) do |item,acc|
-        if item.is_a?(Array)
-          item.each {|sub_item|
-            acc << sub_item
-          }
-        elsif item.is_a?(Integer)
-          acc << item
-        else
-          raise ArgumentError, "non-integer value found: #{item.class}"
-        end
-      end
+  until list.all? { |item| item.is_a?(Integer) } || list == []
+    list = flatten_one_level(list)
+  end
+  list
+end
+
+def flatten_one_level(list)
+  list.each_with_object([]) do |item,acc|
+    if item.is_a?(Array)
+      item.each {|sub_item| acc << sub_item }
+    elsif item.is_a?(Integer)
+      acc << item
+    else
+      raise ArgumentError, "non-integer value found: #{item.class}"
     end
-    list
   end
 end
 ```
