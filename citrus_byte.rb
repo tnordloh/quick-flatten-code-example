@@ -3,7 +3,7 @@ module ArrayTool
   
   def flatten(list,acc = [])
     list.each_with_object(acc) do |item,acc|
-      if item.class == Array 
+      if item.kind_of?(Array)
         flatten(item,acc)
       elsif item.kind_of?(Integer)
         acc << item
