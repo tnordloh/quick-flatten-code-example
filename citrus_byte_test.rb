@@ -26,6 +26,10 @@ describe ArrayTool do
   end
 
   it "can demonstrate Ruby's recursion weaknesses" do
+    #This isn't a 'real' test.  Its purpose is to demonstrate the
+    #circumstances that cause the current implementation of 
+    #ArrayTool.flatten to fail.
+    
     input = (1..100_000).reduce([1]) { |acc,_| [acc] }
     proc { ArrayTool.flatten(input) }.must_raise(SystemStackError)
   end
